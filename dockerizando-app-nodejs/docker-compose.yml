@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  nodejs:
+    image: wolmermartins/app-node-dockerizado:latest
+    build: .
+    ports:
+      - 3090
+    depends_on:
+      - db
+  db:
+    image: postgres
+    restart: 'always'
+    environment:
+      POSTGRES_PASSWORD: 'mysecretpassword'
+    volumes:
+      - ./dados_postgres:/var/lib/postgresql/data
+    ports:
+      - 5432
